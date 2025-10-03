@@ -3,8 +3,8 @@ pipeline {
 
     environment {
         SONARQUBE_ENV = 'sonarqube-server'
-        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk'
-        PATH = "${JAVA_HOME}/bin:${env.PATH}"        
+        // JAVA_HOME = '/usr/lib/jvm/java-17-openjdk'
+        // PATH = "${JAVA_HOME}/bin:${env.PATH}"        
     }
 
     stages {
@@ -46,15 +46,15 @@ pipeline {
         }
        
         
-        // stage('Quality Gate') {
-        //     steps {
-        //         script {
-        //             timeout(time: 15, unit: 'MINUTES') {
-        //                 waitForQualityGate abortPipeline: true
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Quality Gate') {
+            steps {
+                script {
+                    timeout(time: 10, unit: 'MINUTES') {
+                        waitForQualityGate abortPipeline: true
+                    }
+                }
+            }
+        }
 
         // stage('Quality Gate') {
         //     steps {
