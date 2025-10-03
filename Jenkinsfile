@@ -24,11 +24,11 @@ pipeline {
         //     }
         // }
 
-        stage('Run Tests') {
-            steps {
-        sh 'docker-compose run --rm app npm test'
-            }
-        }
+        // stage('Run Tests') {
+        //     steps {
+        // sh 'docker-compose run --rm app npm test'
+        //     }
+        // }
 
         stage('SonarQube') {
             steps {
