@@ -26,10 +26,9 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh "docker-compose run --rm bookstore-app:4 npm test"
+        sh 'docker-compose run --rm app npm test'
             }
         }
-
 
         stage('SonarQube') {
             steps {
