@@ -44,26 +44,23 @@ pipeline {
         //         }
         //     }
         // }
-        stage('SonarQube') {
+        stage('SonarQube Analysis') {
             steps {
                 script {
-                    // هنا بنجيب JDK 17 اللي مسجل في Jenkins
-                    def jdk17 = tool name: 'jdk17', type: 'jdk'
-                    
-                    // نضبط JAVA_HOME و PATH عشان SonarScanner يستخدم JDK 17
-                    withEnv(["JAVA_HOME=${jdk17}", "PATH=${jdk17}/bin:${env.PATH}"]) {
-                        withSonarQubeEnv('sonarqube-server') {
-                            sh """
-                                sonar-scanner \
-                                  -Dsonar.projectKey=bookstore-app \
-                                  -Dsonar.sources=. \
-                                  -Dsonar.login=${SONAR_AUTH_TOKEN}
-                            """
-                        }
-                    }
+                    // نشغل SonarScanner جوه Docker container مع Java 17
+                    sh """
+                    docker run --rm \\
+                      -e SONAR_HOST_URL=${SONAR_HOST_URL} \\
+                      -e SONAR_LOGIN=${SONAR_AUTH_TOKEN} \\
+                      -v ${WORKSPACE}:/usr/src \\
+                      sonarsource/sonar-scanner-cli:latest \\
+                      -Dsonar.projectKey=bookstore-app \\
+                      -Dsonar.sources=/usr/src
+                    """
                 }
             }
         }
+        
         stage('Quality Gate') {
             steps {
                 script {
