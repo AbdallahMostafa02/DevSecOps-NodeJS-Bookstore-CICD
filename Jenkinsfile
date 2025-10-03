@@ -3,6 +3,8 @@ pipeline {
 
     environment {
         SONARQUBE_ENV = 'sonarqube-server'
+        JAVA_HOME = '/usr/lib/jvm/java-17-openjdk'
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"        
     }
 
     stages {
