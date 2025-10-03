@@ -46,17 +46,18 @@ pipeline {
         // }
         stage('SonarQube Analysis') {
             steps {
-                script {
-                    // نشغل SonarScanner جوه Docker container مع Java 17
-                    sh """
-                    docker run --rm \\
-                      -e SONAR_HOST_URL=${SONAR_HOST_URL} \\
-                      -e SONAR_LOGIN=${SONAR_AUTH_TOKEN} \\
-                      -v ${WORKSPACE}:/usr/src \\
-                      sonarsource/sonar-scanner-cli:latest \\
-                      -Dsonar.projectKey=bookstore-app \\
-                      -Dsonar.sources=/usr/src
-                    """
+                withCredentials([string(credentialsId: 'sonar-token-id', variable: 'SONAR_AUTH_TOKEN')]) {
+                    script {
+                        sh """
+                        docker run --rm \\
+                          -e SONAR_HOST_URL=${SONAR_HOST_URL} \\
+                          -e SONAR_LOGIN=${SONAR_AUTH_TOKEN} \\
+                          -v ${WORKSPACE}:/usr/src \\
+                          sonarsource/sonar-scanner-cli:latest \\
+                          -Dsonar.projectKey=bookstore-app \\
+                          -Dsonar.sources=/usr/src
+                        """
+                    }
                 }
             }
         }
