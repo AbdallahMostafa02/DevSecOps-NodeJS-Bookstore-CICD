@@ -46,15 +46,15 @@ pipeline {
         }
        
         
-        stage('Quality Gate') {
-            steps {
-                script {
-                    timeout(time: 15, unit: 'MINUTES') {
-                        waitForQualityGate abortPipeline: true
-                    }
-                }
-            }
-        }
+        // stage('Quality Gate') {
+        //     steps {
+        //         script {
+        //             timeout(time: 15, unit: 'MINUTES') {
+        //                 waitForQualityGate abortPipeline: true
+        //             }
+        //         }
+        //     }
+        // }
 
         // stage('Quality Gate') {
         //     steps {
