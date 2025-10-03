@@ -32,22 +32,30 @@ pipeline {
         //     }
         // }
 
+        // stage('SonarQube') {
+        //     steps {
+        //         withSonarQubeEnv("${SONARQUBE_ENV}") {
+        //             sh '''
+        //                 sonar-scanner \
+        //                   -Dsonar.projectKey=bookstore-app \
+        //                   -Dsonar.sources=. \
+        //                   -Dsonar.login=$SONAR_AUTH_TOKEN
+        //             '''
+        //         }
+        //     }
+        // }
         stage('SonarQube') {
-            // tools {
-            //     jdk 'JDK17'  // الاسم اللي اخترته في Global Tool Configuration
-            //     }
             steps {
-                withSonarQubeEnv("${SONARQUBE_ENV}") {
-                    sh '''
-                        sonar-scanner \
-                          -Dsonar.projectKey=bookstore-app \
-                          -Dsonar.sources=. \
-                          -Dsonar.login=$SONAR_AUTH_TOKEN
-                    '''
+                script {
+                    def java17 = tool name: 'JDK17', type: 'jdk'
+                    withEnv(["JAVA_HOME=${java17}", "PATH=${java17}/bin:${env.PATH}"]) {
+                        withSonarQubeEnv('sonarqube-server') {
+                            sh 'sonar-scanner -Dsonar.projectKey=bookstore-app -Dsonar.sources=. -Dsonar.login=$SONAR_AUTH_TOKEN'
+                        }
+                    }
                 }
             }
         }
-
         stage('Quality Gate') {
             steps {
                 script {
