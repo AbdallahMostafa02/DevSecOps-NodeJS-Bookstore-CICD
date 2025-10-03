@@ -20,7 +20,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh "docker run --rm bookstore-app:${BUILD_NUMBER} npm test"
+                sh "docker-compose run --rm bookstore-app:${BUILD_NUMBER} npm test"
             }
         }
 
