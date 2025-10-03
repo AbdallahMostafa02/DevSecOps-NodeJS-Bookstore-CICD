@@ -46,28 +46,28 @@ pipeline {
         }
        
         
-        // stage('Quality Gate') {
-        //     steps {
-        //         script {
-        //             timeout(time: 60, unit: 'MINUTES') {
-        //                 waitForQualityGate abortPipeline: true
-        //             }
-        //         }
-        //     }
-        // }
-
         stage('Quality Gate') {
             steps {
                 script {
-                    timeout(time: 15, unit: 'MINUTES') { // وقت انتظار أقصى
-                        def qg = waitForQualityGate()     // هتنتظر SonarQube لحد ما يجهز النتيجة
-                        if (qg.status != 'OK') {
-                            error "Quality Gate failed: ${qg.status}"
-                        }
+                    timeout(time: 60, unit: 'MINUTES') {
+                        waitForQualityGate abortPipeline: true
                     }
                 }
             }
         }
+
+        // stage('Quality Gate') {
+        //     steps {
+        //         script {
+        //             timeout(time: 15, unit: 'MINUTES') { // وقت انتظار أقصى
+        //                 def qg = waitForQualityGate()     // هتنتظر SonarQube لحد ما يجهز النتيجة
+        //                 if (qg.status != 'OK') {
+        //                     error "Quality Gate failed: ${qg.status}"
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
         
         stage('OWASP') {
             steps {
