@@ -47,10 +47,18 @@ pipeline {
         stage('SonarQube') {
             steps {
                 script {
-                    def java17 = tool name: 'JDK17', type: 'jdk'
-                    withEnv(["JAVA_HOME=${java17}", "PATH=${java17}/bin:${env.PATH}"]) {
+                    // هنا بنجيب JDK 17 اللي مسجل في Jenkins
+                    def jdk17 = tool name: 'jdk17', type: 'jdk'
+                    
+                    // نضبط JAVA_HOME و PATH عشان SonarScanner يستخدم JDK 17
+                    withEnv(["JAVA_HOME=${jdk17}", "PATH=${jdk17}/bin:${env.PATH}"]) {
                         withSonarQubeEnv('sonarqube-server') {
-                            sh 'sonar-scanner -Dsonar.projectKey=bookstore-app -Dsonar.sources=. -Dsonar.login=$SONAR_AUTH_TOKEN'
+                            sh """
+                                sonar-scanner \
+                                  -Dsonar.projectKey=bookstore-app \
+                                  -Dsonar.sources=. \
+                                  -Dsonar.login=${SONAR_AUTH_TOKEN}
+                            """
                         }
                     }
                 }
