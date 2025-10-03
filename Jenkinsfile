@@ -18,11 +18,18 @@ pipeline {
             }
         }
 
+        // stage('Run Tests') {
+        //     steps {
+        //         sh "docker-compose run --rm bookstore-app:${BUILD_NUMBER} npm test"
+        //     }
+        // }
+
         stage('Run Tests') {
             steps {
-                sh "docker-compose run --rm bookstore-app:${BUILD_NUMBER} npm test"
+                sh "docker-compose run --rm bookstore-app:4 npm test"
             }
         }
+
 
         stage('SonarQube') {
             steps {
