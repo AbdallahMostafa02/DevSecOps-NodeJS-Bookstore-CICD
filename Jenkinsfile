@@ -31,9 +31,9 @@ pipeline {
         // }
 
         stage('SonarQube') {
-            tools {
-                jdk 'JDK17'  // الاسم اللي اخترته في Global Tool Configuration
-                }
+            // tools {
+            //     jdk 'JDK17'  // الاسم اللي اخترته في Global Tool Configuration
+            //     }
             steps {
                 withSonarQubeEnv("${SONARQUBE_ENV}") {
                     sh '''
