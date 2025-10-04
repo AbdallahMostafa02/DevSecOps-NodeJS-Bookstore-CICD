@@ -108,8 +108,8 @@ pipeline {
         stage('Start Test MongoDB') {
             steps {
                 sh '''
+                docker rm -f mongo-test || true
                 docker run -d --name mongo-test -p 27017:27017 mongo:latest
-                sleep 7
                 '''
             }
         }
