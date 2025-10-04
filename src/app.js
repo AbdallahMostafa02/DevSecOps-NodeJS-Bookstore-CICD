@@ -45,28 +45,43 @@
 
 // module.exports = app; // for testing
 // ظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظظ
+// const express = require("express");
+// const mongoose = require("mongoose");
+// const authRoutes = require("./routes/auth");
+// const bookRoutes = require("./routes/books");
+
+// const app = express();
+// app.use(express.json());
+
+// app.use("/api/auth", authRoutes);
+// app.use("/api/books", bookRoutes);
+
+// const mongoURI = process.env.MONGO_URL || "mongodb://localhost:27017/bookstore";
+// mongoose.connect(mongoURI)
+//   .then(() => console.log("MongoDB connected"))
+//   .catch(err => console.error(err));
+
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, "0.0.0.0", () => console.log(`Server running on port ${PORT}`));
+
+// module.exports = app;
+// ...........................................................................................
+
 const express = require("express");
 const mongoose = require("mongoose");
-const authRoutes = require("./routes/auth");
-const bookRoutes = require("./routes/books");
+const books = require("./routes/books");
+const auth = require("./routes/auth");
 
 const app = express();
 app.use(express.json());
+app.use("/api/books", books);
+app.use("/api/auth", auth);
 
-app.use("/api/auth", authRoutes);
-app.use("/api/books", bookRoutes);
-
-const mongoURI = process.env.MONGO_URL || "mongodb://localhost:27017/bookstore";
-mongoose.connect(mongoURI)
+mongoose.connect(process.env.MONGO_URL || "mongodb://localhost:27017/bookstore")
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.error(err));
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, "0.0.0.0", () => console.log(`Server running on port ${PORT}`));
-
 module.exports = app;
-
-
 
 
 
