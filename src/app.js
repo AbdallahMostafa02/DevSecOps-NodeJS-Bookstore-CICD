@@ -85,6 +85,36 @@
 // ....................................................................
 
 
+// const express = require("express");
+// const mongoose = require("mongoose");
+// const books = require("./routes/books");
+// const auth = require("./routes/auth");
+
+// const app = express();
+
+// // Middleware
+// app.use(express.json());
+// app.use(express.static("public"));
+
+// // Routes
+// app.use("/api/books", books);
+// app.use("/api/auth", auth);
+
+// // ✅ Route افتراضي للـ Home
+// app.get("/", (req, res) => {
+//   res.send("📚 NodeJS Bookstore API is running. Use /api/books or /api/auth");
+// });
+
+// // MongoDB Connection
+// mongoose.connect(process.env.MONGO_URL || "mongodb://localhost:27017/bookstore")
+//   .then(() => console.log("✅ MongoDB connected"))
+//   .catch(err => console.error("❌ MongoDB connection error:", err));
+
+// module.exports = app;
+
+// ..................................................................................
+
+
 const express = require("express");
 const mongoose = require("mongoose");
 const books = require("./routes/books");
@@ -100,7 +130,7 @@ app.use(express.static("public"));
 app.use("/api/books", books);
 app.use("/api/auth", auth);
 
-// ✅ Route افتراضي للـ Home
+// Home route
 app.get("/", (req, res) => {
   res.send("📚 NodeJS Bookstore API is running. Use /api/books or /api/auth");
 });
@@ -108,11 +138,7 @@ app.get("/", (req, res) => {
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URL || "mongodb://localhost:27017/bookstore")
   .then(() => console.log("✅ MongoDB connected"))
-  .catch(err => console.error("❌ MongoDB connection error:", err));
+  .catch(err => console.error("❌ MongoDB connection error:", err.message));
 
 module.exports = app;
-
-
-
-
 
