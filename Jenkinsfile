@@ -159,13 +159,14 @@ pipeline {
                 sh 'docker-compose up -d --build'
             }
         }
-    }
-
         stage('Start Prometheus') {
             steps {
                 sh 'docker-compose up -d prometheus'
             }
-        }
+        }        
+    }
+
+
     
     post {
         always {
