@@ -52,22 +52,41 @@
 
 // ................................................................................................
 
+// const jwt = require("jsonwebtoken");
+
+// module.exports = (req, res, next) => {
+//   const authHeader = req.header("Authorization");
+//   if (!authHeader) return res.status(401).json({ error: "Access Denied" });
+
+//   const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : authHeader;
+
+//   try {
+//     const verified = jwt.verify(token, process.env.JWT_SECRET);
+//     req.user = verified;
+//     next();
+//   } catch (err) {
+//     console.error("JWT verification failed:", err.message);
+//     res.status(401).json({ error: "Invalid Token" });
+//   }
+// };
+
+// ...........................................................
+
 const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
   const authHeader = req.header("Authorization");
-  if (!authHeader) return res.status(401).json({ error: "Access Denied" });
+  if (!authHeader) return res.status(401).send("Access Denied");
 
   const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : authHeader;
 
   try {
-    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    const verified = jwt.verify(token, "secret123"); // Hardcoded secret
     req.user = verified;
     next();
   } catch (err) {
     console.error("JWT verification failed:", err.message);
-    res.status(401).json({ error: "Invalid Token" });
+    res.status(400).send("Invalid Token");
   }
 };
-
 
