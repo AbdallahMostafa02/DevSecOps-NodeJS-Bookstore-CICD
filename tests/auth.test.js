@@ -35,9 +35,9 @@
 
 
 const request = require("supertest");
-const app = require("../app");
+const app = require("../src/app");
 const mongoose = require("mongoose");
-const User = require("../models/User");
+const User = require("../src/models/User");
 
 beforeAll(async () => {
   await User.deleteMany({});
