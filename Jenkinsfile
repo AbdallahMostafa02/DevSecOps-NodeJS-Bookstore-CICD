@@ -3,8 +3,6 @@ pipeline {
 
     environment {
         SONARQUBE_ENV = 'sonarqube-server'
-        // JAVA_HOME = '/usr/lib/jvm/java-17-openjdk'
-        // PATH = "${JAVA_HOME}/bin:${env.PATH}"        
     }
 
     stages {
@@ -14,23 +12,23 @@ pipeline {
             }
         }
 
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm ci'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh 'npm test'
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 sh "docker build -t bookstore-app:${BUILD_NUMBER} ."
             }
         }
-
-        // stage('Run Tests') {
-        //     steps {
-        //         sh "docker-compose run --rm bookstore-app:${BUILD_NUMBER} npm test"
-        //     }
-        // }
-
-        // stage('Run Tests') {
-        //     steps {
-        // sh 'docker-compose run --rm app npm test'
-        //     }
-        // }
 
         stage('SonarQube') {
             steps {
@@ -44,31 +42,7 @@ pipeline {
                 }
             }
         }
-       
-        
-        // stage('Quality Gate') {
-        //     steps {
-        //         script {
-        //             timeout(time: 10, unit: 'MINUTES') {
-        //                 waitForQualityGate abortPipeline: true
-        //             }
-        //         }
-        //     }
-        // }
 
-        // stage('Quality Gate') {
-        //     steps {
-        //         script {
-        //             timeout(time: 15, unit: 'MINUTES') { // وقت انتظار أقصى
-        //                 def qg = waitForQualityGate()     // هتنتظر SonarQube لحد ما يجهز النتيجة
-        //                 if (qg.status != 'OK') {
-        //                     error "Quality Gate failed: ${qg.status}"
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-        
         stage('OWASP') {
             steps {
                 dependencyCheck odcInstallation: 'DP-Check', additionalArguments: '--scan ./ --format XML --format HTML --out ./dependency-check-report'
@@ -85,27 +59,26 @@ pipeline {
     }
 
     post {
-    always {
-        archiveArtifacts artifacts: '**/dependency-check-report.xml', fingerprint: true
-    }
+        always {
+            archiveArtifacts artifacts: '**/dependency-check-report.xml', fingerprint: true
+        }
 
-    success {
-        echo "Pipeline Completed Successfully!"
-        slackSend(
-            channel: '#devsecops_task_tracking',
-            color: 'good',
-            message: "Pipeline Completed Successfully!"
-        )
-    }
+        success {
+            echo "Pipeline Completed Successfully!"
+            slackSend(
+                channel: '#devsecops_task_tracking',
+                color: 'good',
+                message: "Pipeline Completed Successfully!"
+            )
+        }
 
-    failure {
-        echo "Pipeline Failed!"
-        slackSend(
-            channel: '#devsecops_task_tracking',
-            color: 'danger',
-            message: "Pipeline Failed!"
-        )
+        failure {
+            echo "Pipeline Failed!"
+            slackSend(
+                channel: '#devsecops_task_tracking',
+                color: 'danger',
+                message: "Pipeline Failed!"
+            )
+        }
     }
-}
-
 }
