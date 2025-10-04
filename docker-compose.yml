@@ -41,3 +41,4 @@ services:
 
 volumes:
   mongo_data:
+  prometheus_data:
