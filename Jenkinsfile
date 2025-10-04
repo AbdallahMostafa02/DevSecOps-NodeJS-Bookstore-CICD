@@ -161,6 +161,12 @@ pipeline {
         }
     }
 
+        stage('Start Prometheus') {
+            steps {
+                sh 'docker-compose up -d prometheus'
+            }
+        }
+    
     post {
         always {
             archiveArtifacts artifacts: '**/dependency-check-report.xml', fingerprint: true
