@@ -51,10 +51,10 @@
 
 
 const request = require("supertest");
-const app = require("../app");
+const app = require("../src/app");
 const mongoose = require("mongoose");
-const Book = require("../models/Book");
-const User = require("../models/User");
+const Book = require("../src/models/Book");
+const User = require("../src/models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
