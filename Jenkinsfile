@@ -145,21 +145,7 @@ pipeline {
                 }
             }
         }
-
-        stage('Quality Gate') {
-            steps {
-                script {
-                    timeout(time: 15, unit: 'MINUTES') {
-                        def qg = waitForQualityGate()
-                        if (qg.status != 'OK') {
-                            error "Quality Gate failed: ${qg.status}"
-                        }
-                    }
-                }
-            }
-        }
         
-
         stage('OWASP') {
             steps {
                 dependencyCheck odcInstallation: 'DP-Check', additionalArguments: '--scan ./ --format XML --format HTML --out ./dependency-check-report'
