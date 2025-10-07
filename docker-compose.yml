@@ -9,7 +9,7 @@ services:
       - mongo_data:/data/db
 
   app:
-    build: .
+    image: bookstore-app:${BUILD_NUMBER}
     depends_on:
       - mongo
     ports:
