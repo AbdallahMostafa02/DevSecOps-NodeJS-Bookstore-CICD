@@ -40,12 +40,6 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                sh "docker build -t bookstore-app:${BUILD_NUMBER} ."
-            }
-        }
-
         stage('SonarQube') {
             steps {
                 withSonarQubeEnv("${SONARQUBE_ENV}") {
@@ -53,6 +47,7 @@ pipeline {
                         sonar-scanner \
                           -Dsonar.projectKey=bookstore-app \
                           -Dsonar.sources=. \
+                          -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
                           -Dsonar.login=$SONAR_AUTH_TOKEN
                     '''
                 }
@@ -66,6 +61,12 @@ pipeline {
             }
         }
 
+        stage('Build Docker Image') {
+            steps {
+                sh "docker build -t bookstore-app:${BUILD_NUMBER} ."
+            }
+        }        
+        
         stage('Deploy') {
             steps {
                 sh 'docker-compose down || true'
