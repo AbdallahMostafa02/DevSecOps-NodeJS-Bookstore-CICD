@@ -29,7 +29,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh 'MONGO_URL=mongodb://localhost:27017/bookstore npm test'
+                sh 'MONGO_URL=mongodb://localhost:27018/bookstore npm test'
             }
         }
 
