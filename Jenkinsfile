@@ -22,7 +22,7 @@ pipeline {
             steps {
                 sh '''
                 docker rm -f mongo-test || true
-                docker run -d --name mongo-test -p 27017:27017 mongo:latest
+                docker run -d --name mongo-test -p 27018:27017 mongo:latest
                 '''
             }
         }
