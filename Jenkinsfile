@@ -33,13 +33,6 @@ pipeline {
             }
         }
 
-        stage('Stop Test MongoDB') {
-            steps {
-                sh 'docker stop mongo-test || true'
-                sh 'docker rm mongo-test || true'
-            }
-        }
-
         stage('SonarQube') {
             steps {
                 withSonarQubeEnv("${SONARQUBE_ENV}") {
@@ -70,7 +63,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'docker-compose down || true'
-                sh 'docker-compose up -d --build'
+                sh "BUILD_NUMBER=${BUILD_NUMBER} docker-compose up -d"                
             }
         }      
     }
@@ -79,6 +72,8 @@ pipeline {
     
     post {
         always {
+            sh 'docker stop mongo-test || true'
+            sh 'docker rm mongo-test || true'
             archiveArtifacts artifacts: '**/dependency-check-report.xml', fingerprint: true
         }
 
