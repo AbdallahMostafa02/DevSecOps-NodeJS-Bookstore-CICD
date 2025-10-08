@@ -64,7 +64,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: '946aa37a-f97f-4e88-ace4-b707d51d069c', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
-                        docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+                        echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
                         docker tag bookstore-app:${BUILD_NUMBER} $DOCKER_USER/bookstore-app:${BUILD_NUMBER}
                         docker push $DOCKER_USER/bookstore-app:${BUILD_NUMBER}
                     '''
