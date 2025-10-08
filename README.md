@@ -6,14 +6,14 @@
 ## 📑 Table of Contents
 
 1. [Overview](#overview)  
-2. [Prerequisites](#-prerequisites)  
-3. [SonarQube Setup](#--sonarqube-setup)  
-4. [Jenkins Setup](#-jenkins-setup)  
-5. [Running the Pipeline](#-running-the-pipeline)  
-6. [Pipeline Stages](#-pipeline-stages)  
-7. [Access Services](#-access-services)  
-8. [Pipeline Flow Diagram](#-pipeline-flow-diagram)  
-9. [Contact](#-contact)
+2. [Prerequisites](#prerequisites)  
+3. [SonarQube Setup](#sonarqube-setup)  
+4. [Jenkins Setup](#jenkins-setup)  
+5. [Running the Pipeline](#running-the-pipeline)  
+6. [Pipeline Stages](#pipeline-stages)  
+7. [Access Services](#access-services)  
+8. [Pipeline Flow Diagram](#pipeline-flow-diagram)  
+9. [Contact](#contact)
 
 ---
 
@@ -23,7 +23,7 @@ This project demonstrates a **complete DevSecOps CI/CD pipeline** for a **Node.j
 
 ---
 
-## ⚙️ Prerequisites
+## Prerequisites
 
 Before running the pipeline, make sure the following are installed and configured properly on your machine:
 
@@ -39,7 +39,7 @@ Before running the pipeline, make sure the following are installed and configure
 
 ---
 
-## 🧠 SonarQube Setup
+## SonarQube Setup
 
 1. Run SonarQube container:
 
@@ -71,7 +71,7 @@ Before running the pipeline, make sure the following are installed and configure
 
 ---
 
-## 🔧 Jenkins Setup
+## Jenkins Setup
 
 1. Open Jenkins in your browser and log in:
 
@@ -107,7 +107,7 @@ Before running the pipeline, make sure the following are installed and configure
 
 ---
 
-## 🚀 Running the Pipeline
+## Running the Pipeline
 
 1. Create a new Pipeline project in Jenkins.
 
@@ -123,7 +123,7 @@ Before running the pipeline, make sure the following are installed and configure
 
 ---
 
-## 🧠 Pipeline Stages
+## Pipeline Stages
 
 - Check out the source code
 
@@ -145,7 +145,7 @@ Before running the pipeline, make sure the following are installed and configure
 
 ---
 
-## 🌐 Access Services
+## Access Services
 
 Once the pipeline completes successfully, you can access all services from your browser:
 
@@ -189,7 +189,7 @@ Default credentials:
 
 ---
 
-## 🔄 Pipeline Flow Diagram
+## Pipeline Flow Diagram
 
   ```bash
    GitHub
@@ -211,7 +211,7 @@ Default credentials:
 
 ---
 
-## 📬 Contact
+## Contact
 
 **Abdallah Mostafa**
 
