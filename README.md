@@ -6,14 +6,14 @@
 ## 📑 Table of Contents
 
 1. [Overview](#overview)  
-2. [Prerequisites](#prerequisites)
-3. [SonarQube Setup](#sonarqube-setup)  
-4. [Jenkins Setup](#jenkins-setup)    
-5. [Running the Pipeline](#running-the-pipeline)  
-6. [Pipeline Stages](#pipeline-stages)  
-7. [Access Services](#access-services)  
-8. [Pipeline Flow Diagram](#pipeline-flow-diagram)  
-9. [Contact](#contact)
+2. [Prerequisites](#-prerequisites)  
+3. [SonarQube Setup](#-sonarqube-setup)  
+4. [Jenkins Setup](#-jenkins-setup)  
+5. [Running the Pipeline](#-running-the-pipeline)  
+6. [Pipeline Stages](#-pipeline-stages)  
+7. [Access Services](#-access-services)  
+8. [Pipeline Flow Diagram](#-pipeline-flow-diagram)  
+9. [Contact](#-contact)
 
 ---
 
@@ -35,6 +35,7 @@ Before running the pipeline, make sure the following are installed and configure
   ```bash
   sudo usermod -aG docker jenkins
   sudo systemctl restart jenkins
+  ```
 
 ---
 
