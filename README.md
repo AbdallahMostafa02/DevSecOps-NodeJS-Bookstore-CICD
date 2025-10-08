@@ -3,7 +3,7 @@
 > Complete DevSecOps CI/CD Pipeline using Jenkins, Docker, SonarQube, OWASP, Docker Hub, Prometheus, Grafana, and Slack.
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 
 1. [Overview](#overview)  
 2. [Prerequisites](#prerequisites)  
@@ -149,13 +149,13 @@ Before running the pipeline, make sure the following are installed and configure
 
 Once the pipeline completes successfully, you can access all services from your browser:
 
-🧩 Node.js Bookstore Application
+Node.js Bookstore Application
 
   ```bash
   http://localhost:3000
   ```
 
-🔒 SonarQube Dashboard
+SonarQube Dashboard
 
   ```bash
   http://localhost:9000
@@ -168,13 +168,13 @@ Default credentials:
   Password: admin
   ```
 
-📊 Prometheus
+Prometheus
 
   ```bash
   http://localhost:9090
   ```
 
-📈 Grafana
+Grafana
 
   ```bash
   http://localhost:3001
