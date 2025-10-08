@@ -7,7 +7,7 @@
 
 1. [Overview](#overview)  
 2. [Prerequisites](#-prerequisites)  
-3. [SonarQube Setup](#---sonarqube-setup)  
+3. [SonarQube Setup](#--sonarqube-setup)  
 4. [Jenkins Setup](#-jenkins-setup)  
 5. [Running the Pipeline](#-running-the-pipeline)  
 6. [Pipeline Stages](#-pipeline-stages)  
