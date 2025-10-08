@@ -58,6 +58,18 @@ pipeline {
             steps {
                 sh "docker build -t bookstore-app:${BUILD_NUMBER} ."
             }
+        } 
+
+        stage('Push to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'DockerHub-Credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh '''
+                        docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+                        docker tag bookstore-app:${BUILD_NUMBER} $DOCKER_USER/bookstore-app:${BUILD_NUMBER}
+                        docker push $DOCKER_USER/bookstore-app:${BUILD_NUMBER}
+                    '''
+                }
+            }
         }        
         
         stage('Deploy') {
