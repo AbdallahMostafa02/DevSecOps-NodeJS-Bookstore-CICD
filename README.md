@@ -135,10 +135,62 @@ https://github.com/AbdallahMostafa02/DevSecOps-NodeJS-Bookstore-CICD.git
 - Send Slack notifications
 
 ## 🌐 Access Services
+
+Once the pipeline completes successfully, you can access all services from your browser:
+
+🧩 Node.js Bookstore Application
 ```bash
-| Service                       | URL                     | Default Credentials |
-| ----------------------------- | ----------------------- | ------------------- |
-| Node.js Bookstore Application | `http://localhost:3000` | -                   |
-| SonarQube Dashboard           | `http://localhost:9000` | `admin` / `admin`   |
-| Prometheus                    | `http://localhost:9090` | -                   |
-| Grafana                       | `http://localhost:3001` | `admin` / `admin`   |
+http://localhost:3000
+```
+🔒 SonarQube Dashboard
+```bash
+http://localhost:9000
+```
+Default credentials:
+```bash
+Username: admin
+Password: admin
+```
+📊 Prometheus
+```bash
+http://localhost:9090
+```
+📈 Grafana
+```bash
+http://localhost:3001
+```
+Default credentials:
+```bash
+Username: admin
+Password: admin
+```
+
+🔄 Pipeline Flow Diagram
+```bash
+ GitHub
+   |
+   v
+ Jenkins Pipeline
+ ├─> Checkout Test
+ ├─> Test
+ ├─> SonarQube Analysis
+ ├─> OWASP Dependency Scan
+ ├─> Build Docker Image
+ ├─> Push to Docker Hub
+ ├─> Deploy Container
+ └─> Monitoring & Slack Notifications
+        | 
+        v
+  Prometheus & Grafana
+```
+
+## 📬 Contact
+
+Abdallah Mostafa
+
+📧 abdallahmostafa6884@gmail.com
+
+**Abdallah Mostafa**
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/abdallah-mostafa-04b2421a6/)  
+[![Email](https://img.shields.io/badge/Email-abdallahmostafa6884@gmail.com-red?style=flat&logo=gmail&logoColor=white)](mailto:abdallahmostafa6884@gmail.com)
